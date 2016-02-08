@@ -7,7 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3626270B26D25A4BB5A0779F /* libPods-loopjongen.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D0C0C59D888C0EB8565044F9 /* libPods-loopjongen.a */; };
 		8B74A1921C66BE6600852666 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B74A1911C66BE6600852666 /* main.m */; };
+		8B74A19A1C66BEC300852666 /* Server.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B74A1991C66BEC300852666 /* Server.m */; };
+		8B74A19C1C66C4CD00852666 /* statics.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B74A19B1C66C4CD00852666 /* statics.m */; };
+		8B74A19F1C66FA0500852666 /* Nas.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B74A19E1C66FA0500852666 /* Nas.m */; };
+		8B74A1A21C66FFA100852666 /* Settings.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B74A1A11C66FFA100852666 /* Settings.m */; };
+		8B74A1D41C67056800852666 /* Raspberry.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B74A1D31C67056800852666 /* Raspberry.m */; };
+		8B74A1D61C67098100852666 /* Enums.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B74A1D51C67098100852666 /* Enums.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -25,6 +32,19 @@
 /* Begin PBXFileReference section */
 		8B74A18E1C66BE6600852666 /* loopjongen */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = loopjongen; sourceTree = BUILT_PRODUCTS_DIR; };
 		8B74A1911C66BE6600852666 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		8B74A1981C66BEC300852666 /* Server.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Server.h; sourceTree = "<group>"; };
+		8B74A1991C66BEC300852666 /* Server.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Server.m; sourceTree = "<group>"; };
+		8B74A19B1C66C4CD00852666 /* statics.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = statics.m; sourceTree = "<group>"; };
+		8B74A19D1C66FA0500852666 /* Nas.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Nas.h; sourceTree = "<group>"; };
+		8B74A19E1C66FA0500852666 /* Nas.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Nas.m; sourceTree = "<group>"; };
+		8B74A1A01C66FFA100852666 /* Settings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Settings.h; sourceTree = "<group>"; };
+		8B74A1A11C66FFA100852666 /* Settings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Settings.m; sourceTree = "<group>"; };
+		8B74A1D21C67056800852666 /* Raspberry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Raspberry.h; sourceTree = "<group>"; };
+		8B74A1D31C67056800852666 /* Raspberry.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Raspberry.m; sourceTree = "<group>"; };
+		8B74A1D51C67098100852666 /* Enums.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Enums.m; sourceTree = "<group>"; };
+		908692C0D4E825B6402C0D17 /* Pods-loopjongen.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-loopjongen.debug.xcconfig"; path = "Pods/Target Support Files/Pods-loopjongen/Pods-loopjongen.debug.xcconfig"; sourceTree = "<group>"; };
+		C3286EB3B6F53350EEF8BA10 /* Pods-loopjongen.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-loopjongen.release.xcconfig"; path = "Pods/Target Support Files/Pods-loopjongen/Pods-loopjongen.release.xcconfig"; sourceTree = "<group>"; };
+		D0C0C59D888C0EB8565044F9 /* libPods-loopjongen.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-loopjongen.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -32,17 +52,29 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3626270B26D25A4BB5A0779F /* libPods-loopjongen.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		43CA085AB4DFE2AF77D9525F /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				908692C0D4E825B6402C0D17 /* Pods-loopjongen.debug.xcconfig */,
+				C3286EB3B6F53350EEF8BA10 /* Pods-loopjongen.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		8B74A1851C66BE6600852666 = {
 			isa = PBXGroup;
 			children = (
 				8B74A1901C66BE6600852666 /* loopjongen */,
 				8B74A18F1C66BE6600852666 /* Products */,
+				43CA085AB4DFE2AF77D9525F /* Pods */,
+				E849E066DEF93AFE22E51053 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -58,8 +90,26 @@
 			isa = PBXGroup;
 			children = (
 				8B74A1911C66BE6600852666 /* main.m */,
+				8B74A1D51C67098100852666 /* Enums.m */,
+				8B74A1D21C67056800852666 /* Raspberry.h */,
+				8B74A1D31C67056800852666 /* Raspberry.m */,
+				8B74A1A01C66FFA100852666 /* Settings.h */,
+				8B74A1A11C66FFA100852666 /* Settings.m */,
+				8B74A19D1C66FA0500852666 /* Nas.h */,
+				8B74A19E1C66FA0500852666 /* Nas.m */,
+				8B74A1981C66BEC300852666 /* Server.h */,
+				8B74A1991C66BEC300852666 /* Server.m */,
+				8B74A19B1C66C4CD00852666 /* statics.m */,
 			);
 			path = loopjongen;
+			sourceTree = "<group>";
+		};
+		E849E066DEF93AFE22E51053 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				D0C0C59D888C0EB8565044F9 /* libPods-loopjongen.a */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -69,9 +119,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 8B74A1951C66BE6600852666 /* Build configuration list for PBXNativeTarget "loopjongen" */;
 			buildPhases = (
+				4F74BF447F05B7502875BFEA /* Check Pods Manifest.lock */,
 				8B74A18A1C66BE6600852666 /* Sources */,
 				8B74A18B1C66BE6600852666 /* Frameworks */,
 				8B74A18C1C66BE6600852666 /* CopyFiles */,
+				CF3B1DBE872E92B7971A376F /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -113,11 +165,50 @@
 		};
 /* End PBXProject section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		4F74BF447F05B7502875BFEA /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		CF3B1DBE872E92B7971A376F /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-loopjongen/Pods-loopjongen-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		8B74A18A1C66BE6600852666 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8B74A1D61C67098100852666 /* Enums.m in Sources */,
+				8B74A1D41C67056800852666 /* Raspberry.m in Sources */,
+				8B74A19F1C66FA0500852666 /* Nas.m in Sources */,
+				8B74A19A1C66BEC300852666 /* Server.m in Sources */,
+				8B74A1A21C66FFA100852666 /* Settings.m in Sources */,
+				8B74A19C1C66C4CD00852666 /* statics.m in Sources */,
 				8B74A1921C66BE6600852666 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -206,14 +297,24 @@
 		};
 		8B74A1961C66BE6600852666 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 908692C0D4E825B6402C0D17 /* Pods-loopjongen.debug.xcconfig */;
 			buildSettings = {
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
 		};
 		8B74A1971C66BE6600852666 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C3286EB3B6F53350EEF8BA10 /* Pods-loopjongen.release.xcconfig */;
 			buildSettings = {
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
@@ -237,6 +338,7 @@
 				8B74A1971C66BE6600852666 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
