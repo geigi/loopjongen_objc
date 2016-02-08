@@ -20,3 +20,5 @@
 - (void) ShutdownNas;
 
 @end
+
+@protocol Nas;

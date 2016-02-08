@@ -8,11 +8,12 @@
 
 #import <Foundation/Foundation.h>
 #import "Nas.h"
-#import "Server.h"
+#import "Raspberry.h"
 #import "JSONModel.h"
 
 @interface Settings : JSONModel
 
-@property (strong, nonatomic) NSMutableArray<Server> *Servers;
+@property (strong, nonatomic) NSMutableArray<Nas> *NasServers;
+@property (strong, nonatomic) NSMutableArray<Raspberry> *RpiServers;
 
 @end

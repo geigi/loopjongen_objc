@@ -19,19 +19,19 @@
 #define ANSI_COLOR_RESET   "\x1b[0m"
 
 #define DEFAULT_CONFIG "{\
-\"Freenas\": {\
-\"Ip\": \"192.168.178.26\",\
-\"Mac\": \"aa:bb:aa:bb:aa:bb\",\
-\"User\": \"root\",\
-\"BootDuration\": \"180\",\
-\"Protocol\": \"afp\",\
-\"ServerName\": \"serv\",\
-\"VolumeName\": \"Storage\",\
-\"MountPoint\": \"/Volumes/Storage\"\
-},\
-\"Raspberry\": {\
-\"Ip\": \"192.168.178.21\",\
-\"User\": \"pi\",\
-\"ServerName\": \"raspberry\"\\
-}\
+  \"NasServers\": [{\
+    \"ServerName\": \"serv\",\
+    \"MacAdress\": \"aa:bb:aa:bb:aa:bb\",\
+    \"MountPoint\": \"\/Volumes\/Storage\",\
+    \"Protocol\": \"afp\",\
+    \"VolumeName\": \"Storage\",\
+    \"BootDuration\": 180,\
+    \"Ip\": \"192.168.178.26\",\
+    \"User\": \"root\"\
+  }],\
+  \"RpiServers\": [{\
+    \"Ip\": \"192.168.178.21\",\
+    \"ServerName\": \"raspberry\",\
+    \"User\": \"pi\"\
+  }]\
 }"

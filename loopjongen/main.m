@@ -20,19 +20,32 @@ BOOL Shutdown = false;
 Settings* LoadSettings() {
   Settings* settings = nil;
   NSFileManager *fileManager = [NSFileManager defaultManager];
-  
-  NSString* path = @"~/.loopjongen";
+  NSString* path = NSHomeDirectory();
+  path = [path stringByAppendingString:@"/.loopjongen"];
   
   if ([fileManager fileExistsAtPath:path]){
-    NSString* json = [NSString stringWithContentsOfFile:path encoding:NSUTF8StringEncoding error:nil];
     NSError* err = nil;
+    NSString* json = [NSString stringWithContentsOfFile:path encoding:NSUTF8StringEncoding error:&err];
+    
+    if (json == nil) {
+      [NSException raise:@"JSON read failed." format:@"%@", [err localizedDescription]];
+    }
     
     settings = [[Settings alloc] initWithString:json error:&err];
+    
+    if (settings == nil) {
+      [NSException raise:@"JSON parse failed." format:@"%@", [err localizedDescription]];
+    }
+  }
+  else {
+    //write default settings to disk and parse it
+    //show warning to adapt settings first
   }
   
-  return nil;
+  return settings;
 }
 
+//Propably never used
 void SaveSettings(Settings* settings) {
   NSString* json = [settings toJSONString];
   NSString* path = NSHomeDirectory();
@@ -42,17 +55,15 @@ void SaveSettings(Settings* settings) {
   
   NSError* err = nil;
   [json writeToFile:path atomically:YES encoding:NSUTF8StringEncoding error:&err];
-  NSLog([err localizedDescription]);
+  NSLog(@"%@", [err localizedDescription]);
 }
 
 void executeAction(int action, Settings *servers) {
-  // for 1-3, first element, for 4-6 second, ...
-  // devide action by 3 and use result as index
-  /* if (!servers) {
+   if (!servers) {
    [NSException raise:@"No (valid) servers provided. Please check your config file." format:@"servers is nil"];
    
    return;
-   } */
+   }
   
   if (action < 1) {
     [NSException raise:@"Invalid action, must be bigger than 1." format:@"action is %i",action];
@@ -61,46 +72,42 @@ void executeAction(int action, Settings *servers) {
   int category = action / 3;
   int specificAction = action - (category * 3);
   
-  if (category <= servers.Servers.count) {
-    Server *server =[servers.Servers objectAtIndex:category];
-    if ([server isKindOfClass:[Nas class]]) {
-      NasAction nasAction = (NasAction)specificAction;
-      Nas *nas = (Nas *)server;
-      
-      switch (nasAction) {
-        case boot:
-          [nas BootNas];
-          break;
-          
-        case halt:
-          [nas ShutdownNas];
-          break;
-          
-        case sshNas:
-          //[nas SshSession];
-          break;
-      }
+  if (category <= servers.NasServers.count) {
+    Server *server =[servers.NasServers objectAtIndex:category];
+    NasAction nasAction = (NasAction)specificAction;
+    Nas *nas = (Nas *)server;
+    
+    switch (nasAction) {
+      case boot:
+        [nas BootNas];
+        break;
+        
+      case halt:
+        [nas ShutdownNas];
+        break;
+        
+      case sshNas:
+        [nas SshSession];
+        break;
     }
-    else if ([server isKindOfClass:[Raspberry class]]) {
-      RaspberryAction raspiAction = (RaspberryAction)specificAction;
-      Raspberry *raspi = (Raspberry *)server;
-      
-      switch (raspiAction) {
-        case restartServer:
-          [raspi RestartServer];
-          break;
-          
-        case restartAirplay:
-          [raspi RestartAirPlay];
-          break;
-          
-        case sshPi:
-          //[raspi SshSession];
-          break;
-      }
-    }
-    else {
-      [NSException raise:@"Invalid object in Servers list" format:@"%@",[servers.Servers objectAtIndex:category]];
+  }
+  else if (category <= servers.NasServers.count + servers.RpiServers.count){
+    Server *server =[servers.RpiServers objectAtIndex:(category - servers.NasServers.count)];
+    RaspberryAction raspiAction = (RaspberryAction)specificAction;
+    Raspberry *raspi = (Raspberry *)server;
+    
+    switch (raspiAction) {
+      case restartServer:
+        [raspi RestartServer];
+        break;
+        
+      case restartAirplay:
+        [raspi RestartAirPlay];
+        break;
+        
+      case sshPi:
+        [raspi SshSession];
+        break;
     }
   }
   else {
@@ -118,58 +125,62 @@ void printWelcome(Settings *servers) {
   printf("Server Manager %s\n", VERSION);
   printf("\n");
   
-  /* if (!servers) {
+  if (!servers) {
     [NSException raise:@"No (valid) servers provided. Please check your config file." format:@"servers is nil"];
     
     return;
-  } */
+  }
   
   int menuEntry = 1;
   
   // foreach element in servers
-  // if NAS, insert below
-  
+  // for NAS, insert below
   printf(ANSI_COLOR_RED "NAS" ANSI_COLOR_RESET "\n");
-  printf(ANSI_COLOR_GREEN "Server-IP: " "\n");
-  printf(ANSI_COLOR_GREEN "Server-MAC: " "\n");
-  printf(ANSI_COLOR_GREEN "User: " "\n");
-  printf(ANSI_COLOR_GREEN "Volume to mount: " "\n");
-  printf(ANSI_COLOR_GREEN "Mountpoint: " "\n" ANSI_COLOR_RESET);
-  printf("1. boot & mount" "\n");
-  printf("2. unmount & shutdown" "\n");
-  printf("3. SSH" "\n");
   
-  printf("\n");
+  for (Nas *server in servers.NasServers) {
+    printf(ANSI_COLOR_GREEN "Server-IP: %s" "\n", [server.Ip UTF8String]);
+    printf(ANSI_COLOR_GREEN "Server-MAC: %s" "\n", [server.MacAdress UTF8String]);
+    printf(ANSI_COLOR_GREEN "User: %s" "\n", [server.User UTF8String]);
+    printf(ANSI_COLOR_GREEN "Volume to mount: %s" "\n", [server.VolumeName UTF8String]);
+    printf(ANSI_COLOR_GREEN "Mountpoint: %s" "\n" ANSI_COLOR_RESET, [server.MountPoint UTF8String]);
+    
+    printf("%i. boot & mount" "\n", menuEntry);
+    menuEntry++;
+    printf("%i. unmount & shutdown" "\n", menuEntry);
+    menuEntry++;
+    printf("%i. SSH" "\n", menuEntry);
+    menuEntry++;
+    
+    printf("\n");
+  }
   
-  // if Raspi, insert below
-  
+  // for Raspi, insert below
   printf(ANSI_COLOR_RED "RASPBERRY PI" ANSI_COLOR_RESET "\n");
-  printf(ANSI_COLOR_GREEN "Server-IP: " "\n");
-  printf(ANSI_COLOR_GREEN "User: " "\n" ANSI_COLOR_RESET);
-  printf("4. restart Pi" "\n");
-  printf("5. restart AirPlay" "\n");
-  printf("6. SSH" "\n");
-  
-  printf("\n");
+  for (Raspberry *server in servers.RpiServers) {
+    printf(ANSI_COLOR_GREEN "Server-IP: %s" "\n", [server.Ip UTF8String]);
+    printf(ANSI_COLOR_GREEN "User: %s" "\n" ANSI_COLOR_RESET, [server.User UTF8String]);
+    printf("%i. restart Pi" "\n", menuEntry);
+    menuEntry++;
+    printf("%i. restart AirPlay" "\n", menuEntry);
+    menuEntry++;
+    printf("%i. SSH" "\n", menuEntry);
+    menuEntry++;
+    
+    printf("\n");
+  }
   
   // at the end
-  
   printf(ANSI_COLOR_RED "GENERAL" ANSI_COLOR_RESET "\n");
-  printf("7. edit config" "\n");
-  printf("8. restore default settings" "\n");
-  printf(ANSI_COLOR_MAGENTA "9. EXIT" "\n" ANSI_COLOR_RESET);
+  printf("%i. edit config" "\n", menuEntry);
+  menuEntry++;
+  printf("%i. restore default settings" "\n", menuEntry);
+  printf(ANSI_COLOR_MAGENTA "0. EXIT" "\n" ANSI_COLOR_RESET);
 }
 
 int main(int argc, const char * argv[]) {
   @autoreleasepool {
-    //printWelcome(nil);
-    Settings* s = [[Settings alloc] init];
-    
-    s.Servers = [[NSMutableArray<Server> alloc] initWithObjects:[[Nas alloc] init],[[Raspberry alloc] init],nil];
-    
-    ((Nas*)s.Servers[0]).MacAdress = @"test";
-    
-    SaveSettings(s);
+    Settings* settings = LoadSettings();
+    printWelcome(settings);
   }
     return 0;
 }
