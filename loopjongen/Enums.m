@@ -9,19 +9,19 @@
 #import <Foundation/Foundation.h>
 
 typedef enum {
-  boot,
-  halt,
-  sshNas
+  boot=1,
+  halt=2,
+  sshNas=3
 } NasAction;
 
 typedef enum {
-  restartServer,
-  restartAirplay,
-  sshPi
+  restartServer=1,
+  restartAirplay=2,
+  sshPi=3
 } RaspberryAction;
 
 typedef enum {
-  editConfig,
-  restoreDefaults,
-  exitApp
+  editConfig=1,
+  restoreDefaults=2,
+  exitApp=0
 } GeneralAction;

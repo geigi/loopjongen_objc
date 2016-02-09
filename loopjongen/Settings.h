@@ -16,4 +16,7 @@
 @property (strong, nonatomic) NSMutableArray<Nas> *NasServers;
 @property (strong, nonatomic) NSMutableArray<Raspberry> *RpiServers;
 
+
+- (id)initWithJson:(BOOL)load;
+
 @end

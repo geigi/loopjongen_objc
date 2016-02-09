@@ -17,45 +17,18 @@
 
 BOOL Shutdown = false;
 
-Settings* LoadSettings() {
-  Settings* settings = nil;
-  NSFileManager *fileManager = [NSFileManager defaultManager];
-  NSString* path = NSHomeDirectory();
-  path = [path stringByAppendingString:@"/.loopjongen"];
+int aquireUserInput() {
+  char option[3];
+  int convertedOption = -1;
   
-  if ([fileManager fileExistsAtPath:path]){
-    NSError* err = nil;
-    NSString* json = [NSString stringWithContentsOfFile:path encoding:NSUTF8StringEncoding error:&err];
-    
-    if (json == nil) {
-      [NSException raise:@"JSON read failed." format:@"%@", [err localizedDescription]];
-    }
-    
-    settings = [[Settings alloc] initWithString:json error:&err];
-    
-    if (settings == nil) {
-      [NSException raise:@"JSON parse failed." format:@"%@", [err localizedDescription]];
-    }
+  printf("\nYour Choice: ");
+  fgets(option, 4, stdin);
+  if (sscanf(option, "%i", &convertedOption) == 1) {
+    return convertedOption;
   }
   else {
-    //write default settings to disk and parse it
-    //show warning to adapt settings first
+    return -1;
   }
-  
-  return settings;
-}
-
-//Propably never used
-void SaveSettings(Settings* settings) {
-  NSString* json = [settings toJSONString];
-  NSString* path = NSHomeDirectory();
-  path = [path stringByAppendingString:@"/.loopjongen"];
-  
-  [[NSFileManager defaultManager] createFileAtPath:path contents:nil attributes:nil];
-  
-  NSError* err = nil;
-  [json writeToFile:path atomically:YES encoding:NSUTF8StringEncoding error:&err];
-  NSLog(@"%@", [err localizedDescription]);
 }
 
 void executeAction(int action, Settings *servers) {
@@ -65,59 +38,77 @@ void executeAction(int action, Settings *servers) {
    return;
    }
   
-  if (action < 1) {
+  if (action < 0) {
     [NSException raise:@"Invalid action, must be bigger than 1." format:@"action is %i",action];
   }
   
-  int category = action / 3;
+  if (action == 0) {
+    Shutdown = true;
+    return;
+  }
+  
+  int category = (action - 1) / 3;
   int specificAction = action - (category * 3);
   
-  if (category <= servers.NasServers.count) {
+  if (category < servers.NasServers.count) {
     Server *server =[servers.NasServers objectAtIndex:category];
     NasAction nasAction = (NasAction)specificAction;
     Nas *nas = (Nas *)server;
     
     switch (nasAction) {
       case boot:
-        [nas BootNas];
+        //[nas BootNas];
+        NSLog(@"Boot Nas");
         break;
         
       case halt:
-        [nas ShutdownNas];
+        //[nas ShutdownNas];
+        NSLog(@"Shutdown Nas");
         break;
         
       case sshNas:
-        [nas SshSession];
+        //[nas SshSession];
+        NSLog(@"SSH Nas");
         break;
     }
   }
-  else if (category <= servers.NasServers.count + servers.RpiServers.count){
+  else if (category < servers.NasServers.count + servers.RpiServers.count){
     Server *server =[servers.RpiServers objectAtIndex:(category - servers.NasServers.count)];
     RaspberryAction raspiAction = (RaspberryAction)specificAction;
     Raspberry *raspi = (Raspberry *)server;
     
     switch (raspiAction) {
       case restartServer:
-        [raspi RestartServer];
+        //[raspi RestartServer];
+        NSLog(@"Restart Rpi");
         break;
         
       case restartAirplay:
-        [raspi RestartAirPlay];
+        //[raspi RestartAirPlay];
+        NSLog(@"Restart Airplay");
         break;
         
       case sshPi:
-        [raspi SshSession];
+        //[raspi SshSession];
+        NSLog(@"ssh Rpi");
         break;
     }
   }
   else {
-    //if bigger than servers
-    //1
-    //edit config file
-    //2
-    //restore default settings
-    //3
-    //exit application
+    GeneralAction genAction = (GeneralAction)(action - ((servers.NasServers.count + servers.RpiServers.count) * 3));
+    switch (genAction) {
+      case restoreDefaults:
+        NSLog(@"Restore Defaults");
+        break;
+        
+      case editConfig:
+        NSLog(@"Edit Config");
+        break;
+        
+      case exitApp:
+        Shutdown = true;
+        break;
+    }
   }
 }
 
@@ -179,8 +170,17 @@ void printWelcome(Settings *servers) {
 
 int main(int argc, const char * argv[]) {
   @autoreleasepool {
-    Settings* settings = LoadSettings();
-    printWelcome(settings);
+    Settings* settings = [[Settings alloc] initWithJson:true];
+    
+    while (!Shutdown) {
+      printWelcome(settings);
+      
+      int action = aquireUserInput();
+      
+      if (action > -1)
+        executeAction(action, settings);
+    }
+    
   }
     return 0;
 }
