@@ -10,6 +10,12 @@
 
 @implementation Nas
 
+- (void) BootNas {
+  
+}
 
+- (void) ShutdownNas {
+  
+}
 
 @end

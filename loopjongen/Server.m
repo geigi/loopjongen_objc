@@ -10,4 +10,8 @@
 
 @implementation Server
 
+- (void) SshSession {
+  
+}
+
 @end

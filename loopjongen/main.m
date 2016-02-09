@@ -57,17 +57,17 @@ void executeAction(int action, Settings *servers) {
     
     switch (nasAction) {
       case boot:
-        //[nas BootNas];
+        [nas BootNas];
         NSLog(@"Boot Nas");
         break;
         
       case halt:
-        //[nas ShutdownNas];
+        [nas ShutdownNas];
         NSLog(@"Shutdown Nas");
         break;
         
       case sshNas:
-        //[nas SshSession];
+        [nas SshSession];
         NSLog(@"SSH Nas");
         break;
     }
@@ -79,17 +79,17 @@ void executeAction(int action, Settings *servers) {
     
     switch (raspiAction) {
       case restartServer:
-        //[raspi RestartServer];
+        [raspi RestartServer];
         NSLog(@"Restart Rpi");
         break;
         
       case restartAirplay:
-        //[raspi RestartAirPlay];
+        [raspi RestartAirPlay];
         NSLog(@"Restart Airplay");
         break;
         
       case sshPi:
-        //[raspi SshSession];
+        [raspi SshSession];
         NSLog(@"ssh Rpi");
         break;
     }

@@ -6,7 +6,7 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "loopjongen/main.m"
@@ -17,6 +17,38 @@
             endingLineNumber = "72"
             landmarkName = "executeAction()"
             landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "executeAction"
+                  moduleName = "loopjongen"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ju/Code/loopjongen/loopjongen/main.m"
+                  timestampString = "476698404.993134"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "74"
+                  endingLineNumber = "74"
+                  offsetFromSymbolStart = "641">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "executeAction"
+                  moduleName = "loopjongen"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ju/Code/loopjongen/loopjongen/main.m"
+                  timestampString = "476698404.995085"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "74"
+                  endingLineNumber = "74"
+                  offsetFromSymbolStart = "665">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

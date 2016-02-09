@@ -10,4 +10,12 @@
 
 @implementation Raspberry
 
+- (void) RestartServer {
+  
+}
+
+- (void) RestartAirPlay {
+  
+}
+
 @end
