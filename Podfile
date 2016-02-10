@@ -5,5 +5,6 @@ platform :osx, '10.11'
 
 target 'loopjongen' do
   pod 'JSONModel'
+  pod 'NMSSH'
 end
 

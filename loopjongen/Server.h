@@ -15,7 +15,7 @@
 @property NSString *ServerName;
 @property NSString *User;
 
-- (void) SshSession;
+- (void) InteractiveSshSession;
 
 @end
 

@@ -7,11 +7,37 @@
 //
 
 #import "Server.h"
+#import <NMSSH/NMSSH.h>
 
 @implementation Server
 
-- (void) SshSession {
+- (NMSSHSession*) ConnectSsh {
+  NMSSHSession* session = [NMSSHSession connectToHost:self.Ip withUsername:self.User];
   
+  if (session.isConnected) {
+    NSString* path = NSHomeDirectory();
+    path = [path stringByAppendingString:@"/.ssh/"];
+    path = [path stringByAppendingString:@"id_rsa"];
+    
+    [session authenticateByPublicKey:nil privateKey:path andPassword:nil];
+    
+    if (session.isAuthorized) {
+      return session;
+    }
+    
+    else {
+      [NSException raise:@"Could not authorize at SSH server. Check your public/private keys." format:@"Server: %@, User: %@", self.Ip, self.User];
+      return nil;
+    }
+  }
+  else {
+    [NSException raise:@"Could not connect to SSH server." format:@"Server: %@, User: %@", self.Ip, self.User];
+    return nil;
+  }
+}
+
+- (void) InteractiveSshSession {
+  [self ConnectSsh];
 }
 
 @end

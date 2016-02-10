@@ -17,6 +17,32 @@
 
 BOOL Shutdown = false;
 
+void loadBar(int x, int n, int r, int w)
+{
+  // Only update r times.
+  if ( x % (n/r) != 0 ) return;
+  
+  // Calculuate the ratio of complete-to-incomplete.
+  float ratio = x/(float)n;
+  int   c     = ratio * w;
+  
+  // Show the percentage complete.
+  printf("%3d%% [", (int)(ratio*100) );
+                 
+  // Show the load bar.
+  for (int x=0; x<c; x++)
+  printf("=");
+
+  for (int x=c; x<w; x++)
+  printf(" ");
+
+  // ANSI Control codes to go back to the
+  // previous line and clear it.
+  // printf("]\n33[F33[J");
+  printf("]\r"); // Move to the first column
+  fflush(stdout);
+}
+
 int aquireUserInput() {
   char option[3];
   int convertedOption = -1;
@@ -59,6 +85,11 @@ void executeAction(int action, Settings *servers) {
       case boot:
         [nas BootNas];
         NSLog(@"Boot Nas");
+        for (int i = 0; i < nas.BootDuration; i++) {
+          loadBar(i, nas.BootDuration, 100, 70);
+          [NSThread sleepForTimeInterval:0.5f];
+        }
+        
         break;
         
       case halt:
@@ -67,7 +98,7 @@ void executeAction(int action, Settings *servers) {
         break;
         
       case sshNas:
-        [nas SshSession];
+        [nas InteractiveSshSession];
         NSLog(@"SSH Nas");
         break;
     }
@@ -89,7 +120,7 @@ void executeAction(int action, Settings *servers) {
         break;
         
       case sshPi:
-        [raspi SshSession];
+        [raspi InteractiveSshSession];
         NSLog(@"ssh Rpi");
         break;
     }
