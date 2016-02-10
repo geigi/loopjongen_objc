@@ -9,9 +9,43 @@
 #import <Foundation/Foundation.h>
 #import "Settings.h"
 #import "Raspberry.h"
+#import "statics.m"
 
 @implementation Settings
-Settings* LoadSettings() {
+- (void) EditConfig {
+  system("nano ~/.loopjongen");
+  
+  Settings* newSettings = [self LoadSettings];
+  
+  self.NasServers = newSettings.NasServers;
+  self.RpiServers = newSettings.RpiServers;
+}
+
+- (void) RestoreDefaults {
+  NSFileManager *fileManager = [NSFileManager defaultManager];
+  
+  NSString *path = NSHomeDirectory();
+  path = [path stringByAppendingString:@"/.loopjongen"];
+  
+  if (![fileManager fileExistsAtPath:path]){
+    [[NSFileManager defaultManager] createFileAtPath:path contents:nil attributes:nil];
+  }
+  
+  NSError* err;
+  NSString* content = [[NSString alloc] initWithUTF8String:DEFAULT_CONFIG];
+  
+  
+  BOOL writeSucess = [content writeToFile:path atomically:YES encoding:NSStringEncodingConversionAllowLossy error:&err];
+  if (!writeSucess)
+    [NSException raise:@"Could not write default settings file." format:@"%@", [err localizedDescription]];
+
+  Settings* defaultSettings = [self LoadSettings];
+  
+  self.NasServers = defaultSettings.NasServers;
+  self.RpiServers = defaultSettings.RpiServers;
+}
+
+- (Settings*) LoadSettings {
   Settings* settings = nil;
   NSFileManager *fileManager = [NSFileManager defaultManager];
   NSString* path = NSHomeDirectory();
@@ -28,12 +62,22 @@ Settings* LoadSettings() {
     settings = [[Settings alloc] initWithString:json error:&err];
     
     if (settings == nil) {
-      [NSException raise:@"JSON parse failed." format:@"%@", [err localizedDescription]];
+      printf("JSON parse failed. Reason: %s\nPress enter to edit your settings file now.", [[err localizedDescription] UTF8String]);
+      getchar();
+      system("nano ~/.loopjongen");
+      
+      settings = [self LoadSettings];
+      //[NSException raise:@"JSON parse failed." format:@"%@", [err localizedDescription]];
     }
   }
   else {
-    //write default settings to disk and parse it
-    //show warning to adapt settings first
+    [self RestoreDefaults];
+    printf("No settings file was present.\nPress enter to edit the default configuration now");
+    getchar();
+    
+    system("nano ~/.loopjongen");
+    
+    settings = [self LoadSettings];
   }
   
   return settings;
@@ -61,7 +105,7 @@ void SaveSettings(Settings* settings) {
     return nil;
   
   if (load)
-    return LoadSettings();
+    return [self LoadSettings];
   else
     return self;
 }

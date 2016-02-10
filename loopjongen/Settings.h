@@ -19,4 +19,8 @@
 
 - (id)initWithJson:(BOOL)load;
 
+- (void) EditConfig;
+- (void)RestoreDefaults;
+
+
 @end

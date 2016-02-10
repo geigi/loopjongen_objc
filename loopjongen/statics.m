@@ -22,7 +22,7 @@
   \"NasServers\": [{\
     \"ServerName\": \"serv\",\
     \"MacAdress\": \"aa:bb:aa:bb:aa:bb\",\
-    \"MountPoint\": \"\/Volumes\/Storage\",\
+    \"MountPoint\": \"/Volumes/Storage\",\
     \"Protocol\": \"afp\",\
     \"VolumeName\": \"Storage\",\
     \"BootDuration\": 180,\

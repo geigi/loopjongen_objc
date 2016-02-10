@@ -130,10 +130,12 @@ void executeAction(int action, Settings *servers) {
     switch (genAction) {
       case restoreDefaults:
         NSLog(@"Restore Defaults");
+        [servers RestoreDefaults];
         break;
         
       case editConfig:
         NSLog(@"Edit Config");
+        [servers EditConfig];
         break;
         
       case exitApp:
