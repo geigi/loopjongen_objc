@@ -36,8 +36,22 @@
   }
 }
 
+- (void) ExecuteCommand:(NSString*) command {
+  NMSSHSession* session = [self ConnectSsh];
+  NSError *err = nil;
+  
+  [session.channel execute:command error:&err];
+  
+  [session disconnect];
+}
+
 - (void) InteractiveSshSession {
-  [self ConnectSsh];
+  NSString* command = @"ssh ";
+  command = [command stringByAppendingString:self.User];
+  command = [command stringByAppendingString:@"@"];
+  command = [command stringByAppendingString:self.Ip];
+  
+  system([command UTF8String]);
 }
 
 @end

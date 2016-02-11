@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "JSONModel.h"
+#import <NMSSH/NMSSH.h>
 
 @interface Server : JSONModel
 
@@ -16,6 +17,8 @@
 @property NSString *User;
 
 - (void) InteractiveSshSession;
+- (NMSSHSession*) ConnectSsh;
+- (void) ExecuteCommand:(NSString*) command;
 
 @end
 
