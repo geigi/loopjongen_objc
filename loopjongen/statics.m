@@ -35,3 +35,5 @@
     \"User\": \"pi\"\n\
   }]\n\
 }"
+
+#define MOUNT_VOLUME_SCRIPT "tell application \"Finder\" to mount volume \"afp://Server/VolumeName\""

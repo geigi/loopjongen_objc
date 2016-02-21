@@ -17,6 +17,8 @@
 @property NSString *MountPoint;
 
 - (void) BootNas;
+- (void) MountVolume;
+- (void) UmountVolume;
 - (void) ShutdownNas;
 
 @end

@@ -92,22 +92,22 @@ void executeAction(int action, Settings *servers) {
     switch (nasAction) {
       case boot:
         [nas BootNas];
-        NSLog(@"Boot Nas");
+        
         for (int i = 0; i < nas.BootDuration; i++) {
           loadBar(i, nas.BootDuration, 100, 70);
           [NSThread sleepForTimeInterval:0.5f];
         }
         
+        [nas MountVolume];
         break;
         
       case halt:
+        [nas UmountVolume];
         [nas ShutdownNas];
-        NSLog(@"Shutdown Nas");
         break;
         
       case sshNas:
         [nas InteractiveSshSession];
-        NSLog(@"SSH Nas");
         break;
     }
   }
@@ -119,17 +119,14 @@ void executeAction(int action, Settings *servers) {
     switch (raspiAction) {
       case restartServer:
         [raspi RestartServer];
-        NSLog(@"Restart Rpi");
         break;
         
       case restartAirplay:
         [raspi RestartAirPlay];
-        NSLog(@"Restart Airplay");
         break;
         
       case sshPi:
         [raspi InteractiveSshSession];
-        NSLog(@"ssh Rpi");
         break;
     }
   }
@@ -137,12 +134,10 @@ void executeAction(int action, Settings *servers) {
     GeneralAction genAction = (GeneralAction)(action - ((servers.NasServers.count + servers.RpiServers.count) * 3));
     switch (genAction) {
       case restoreDefaults:
-        NSLog(@"Restore Defaults");
         [servers RestoreDefaults];
         break;
         
       case editConfig:
-        NSLog(@"Edit Config");
         [servers EditConfig];
         break;
         
