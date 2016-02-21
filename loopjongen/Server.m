@@ -42,6 +42,10 @@
   
   [session.channel execute:command error:&err];
   
+  if (err != nil) {
+    NSLog(@"Failed to execute SSH command, because: %@", [err localizedDescription]);
+  }
+  
   [session disconnect];
 }
 

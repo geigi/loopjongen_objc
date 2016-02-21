@@ -17,6 +17,14 @@
 
 BOOL Shutdown = false;
 
+void AppError(NSString *err) {
+  system("clear");
+  
+  printf(ANSI_COLOR_RED "%s\n" ANSI_COLOR_RESET, [err UTF8String]);
+  printf("Press any key to return to the main menu");
+  getchar();
+}
+
 void loadBar(int x, int n, int r, int w)
 {
   // Only update r times.
@@ -206,12 +214,18 @@ int main(int argc, const char * argv[]) {
     Settings* settings = [[Settings alloc] initWithJson:true];
     
     while (!Shutdown) {
-      printWelcome(settings);
+      @try {
+        printWelcome(settings);
       
-      int action = aquireUserInput();
+        int action = aquireUserInput();
       
-      if (action > -1)
-        executeAction(action, settings);
+        if (action > -1)
+          executeAction(action, settings);
+      }
+      @catch (NSException* ex){
+        NSString* message = [NSString stringWithFormat:@"Error: %@\n%@",[ex name], [ex reason]];
+        AppError(message);
+      }
     }
     
   }
