@@ -18,20 +18,20 @@
 #define ANSI_COLOR_CYAN    "\x1b[36m"
 #define ANSI_COLOR_RESET   "\x1b[0m"
 
-#define DEFAULT_CONFIG "{\
-  \"NasServers\": [{\
-    \"ServerName\": \"serv\",\
-    \"MacAdress\": \"aa:bb:aa:bb:aa:bb\",\
-    \"MountPoint\": \"/Volumes/Storage\",\
-    \"Protocol\": \"afp\",\
-    \"VolumeName\": \"Storage\",\
-    \"BootDuration\": 180,\
-    \"Ip\": \"192.168.178.26\",\
-    \"User\": \"root\"\
-  }],\
-  \"RpiServers\": [{\
-    \"Ip\": \"192.168.178.21\",\
-    \"ServerName\": \"raspberry\",\
-    \"User\": \"pi\"\
-  }]\
+#define DEFAULT_CONFIG "{\n\
+  \"NasServers\": [{\n\
+    \"ServerName\": \"serv\",\n\
+    \"MacAdress\": \"aa:bb:aa:bb:aa:bb\",\n\
+    \"MountPoint\": \"/Volumes/Storage\",\n\
+    \"Protocol\": \"afp\",\n\
+    \"VolumeName\": \"Storage\",\n\
+    \"BootDuration\": 180,\n\
+    \"Ip\": \"192.168.178.26\",\n\
+    \"User\": \"root\"\n\
+  }],\n\
+  \"RpiServers\": [{\n\
+    \"Ip\": \"192.168.178.21\",\n\
+    \"ServerName\": \"raspberry\",\n\
+    \"User\": \"pi\"\n\
+  }]\n\
 }"
