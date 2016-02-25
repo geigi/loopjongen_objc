@@ -15,6 +15,8 @@
 		8B74A1A21C66FFA100852666 /* Settings.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B74A1A11C66FFA100852666 /* Settings.m */; };
 		8B74A1D41C67056800852666 /* Raspberry.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B74A1D31C67056800852666 /* Raspberry.m */; };
 		8B74A1D61C67098100852666 /* Enums.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B74A1D51C67098100852666 /* Enums.m */; };
+		8BD1AD431C7E98BA009BD199 /* Menu.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BD1AD421C7E98BA009BD199 /* Menu.m */; };
+		8BD1AD491C7E9C5E009BD199 /* Helpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BD1AD481C7E9C5E009BD199 /* Helpers.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -42,6 +44,10 @@
 		8B74A1D21C67056800852666 /* Raspberry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Raspberry.h; sourceTree = "<group>"; };
 		8B74A1D31C67056800852666 /* Raspberry.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Raspberry.m; sourceTree = "<group>"; };
 		8B74A1D51C67098100852666 /* Enums.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Enums.m; sourceTree = "<group>"; };
+		8BD1AD411C7E98BA009BD199 /* Menu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Menu.h; sourceTree = "<group>"; };
+		8BD1AD421C7E98BA009BD199 /* Menu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Menu.m; sourceTree = "<group>"; };
+		8BD1AD471C7E9C5E009BD199 /* Helpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Helpers.h; sourceTree = "<group>"; };
+		8BD1AD481C7E9C5E009BD199 /* Helpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Helpers.m; sourceTree = "<group>"; };
 		908692C0D4E825B6402C0D17 /* Pods-loopjongen.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-loopjongen.debug.xcconfig"; path = "Pods/Target Support Files/Pods-loopjongen/Pods-loopjongen.debug.xcconfig"; sourceTree = "<group>"; };
 		C3286EB3B6F53350EEF8BA10 /* Pods-loopjongen.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-loopjongen.release.xcconfig"; path = "Pods/Target Support Files/Pods-loopjongen/Pods-loopjongen.release.xcconfig"; sourceTree = "<group>"; };
 		D0C0C59D888C0EB8565044F9 /* libPods-loopjongen.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-loopjongen.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -90,6 +96,8 @@
 			isa = PBXGroup;
 			children = (
 				8B74A1911C66BE6600852666 /* main.m */,
+				8BD1AD471C7E9C5E009BD199 /* Helpers.h */,
+				8BD1AD481C7E9C5E009BD199 /* Helpers.m */,
 				8B74A1D51C67098100852666 /* Enums.m */,
 				8B74A1D21C67056800852666 /* Raspberry.h */,
 				8B74A1D31C67056800852666 /* Raspberry.m */,
@@ -100,6 +108,8 @@
 				8B74A1981C66BEC300852666 /* Server.h */,
 				8B74A1991C66BEC300852666 /* Server.m */,
 				8B74A19B1C66C4CD00852666 /* statics.m */,
+				8BD1AD411C7E98BA009BD199 /* Menu.h */,
+				8BD1AD421C7E98BA009BD199 /* Menu.m */,
 			);
 			path = loopjongen;
 			sourceTree = "<group>";
@@ -209,6 +219,8 @@
 				8B74A19A1C66BEC300852666 /* Server.m in Sources */,
 				8B74A1A21C66FFA100852666 /* Settings.m in Sources */,
 				8B74A19C1C66C4CD00852666 /* statics.m in Sources */,
+				8BD1AD491C7E9C5E009BD199 /* Helpers.m in Sources */,
+				8BD1AD431C7E98BA009BD199 /* Menu.m in Sources */,
 				8B74A1921C66BE6600852666 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
