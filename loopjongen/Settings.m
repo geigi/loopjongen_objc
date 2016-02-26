@@ -22,6 +22,26 @@
 }
 
 - (void) RestoreDefaults {
+  BOOL validAnswer = false;
+  
+  while (!validAnswer) {
+    system("clear");
+    
+    printf("Do you really want to restore your settings? (y/n)" "\n");
+    char answer = getchar();
+    
+    switch (answer) {
+      case 'y':
+        validAnswer = true;
+        break;
+        
+      case 'n':
+        return;
+        break;
+    }
+  }
+  
+  
   NSFileManager *fileManager = [NSFileManager defaultManager];
   
   NSString *path = NSHomeDirectory();
